@@ -87,7 +87,10 @@ class DomesticCurrency {
             return null;
 
         Address address = addresses.get(0);
-        String addressLine = address.getLocality() + ", " + address.getCountryName();
+        String addressLine;
+        if (address.getLocality() != null && address.getCountryName() != null)
+            addressLine = address.getLocality() + ", " + address.getCountryName();
+        else addressLine = address.getAddressLine(0).replaceAll("\\d","");
 
         Currency currency = null;
         try {
